@@ -218,10 +218,10 @@ hardware/case/
 <ul>
   <li>✔ Architecture completed</li>
   <li>✔ Repository structure created</li>
-  <li>⬜ Sensor node firmware</li>
-  <li>⬜ Gateway firmware</li>
-  <li>⬜ Wiring diagrams</li>
-  <li>⬜ 3D case design</li>
+  <li>✔ Sensor node firmware</li>
+  <li>✔ Gateway firmware</li>
+  <li>✔ Wiring diagrams</li>
+  <li>✔ 3D case design</li>
   <li>⬜ Dashboard setup</li>
 </ul>
 
