@@ -1,176 +1,156 @@
-<h1>📡 <strong>LoRaSense — Solar-Powered LoRa Environmental Monitoring System</strong></h1>
+<h1><strong>LoRaSense — Solar Powered LoRa Environmental Monitoring System</strong></h1>
 
 <p>
-LoRaSense is a <strong>low-cost, long-range, solar-powered environmental monitoring system</strong> 
-designed to track <strong>air quality, temperature, humidity, and noise pollution</strong> across large areas.  
-Each sensor node runs on <strong>solar energy</strong>, communicates using <strong>LoRa</strong>, and sends data to a central 
-<strong>ESP32 gateway</strong> that uploads readings to a cloud dashboard and performs optional 
-<strong>AI anomaly detection</strong>.
+LoRaSense is a project I built to collect environmental data over long distances using LoRa.
+Each sensor node runs on a small solar setup and sends measurements like temperature, humidity,
+air quality, and noise level to a central ESP32 gateway. The gateway forwards everything to a cloud
+dashboard. I also experimented with simple anomaly detection for unusual readings.
 </p>
 
 <p>
-This project demonstrates <strong>IoT engineering, wireless networking, 3D design, solar power systems, 
-and embedded firmware development</strong>, making it ideal for Hack Club Blueprint (Tier 3).
+This project covers several areas: IoT, low-power hardware, wireless communication,
+firmware development, and 3D printed enclosures. It fits well as a Blueprint Tier 3 project.
 </p>
 
 <hr>
 
-<h2>🚀 <strong>Features</strong></h2>
+<h2><strong>Features</strong></h2>
 
-<h3>✔ Sensor Node (Solar Powered)</h3>
+<h3>Sensor Node (Solar Powered)</h3>
 <ul>
-  <li>🌡️ Temperature measurement</li>
-  <li>💧 Humidity measurement</li>
-  <li>🌫️ Air Quality (MQ135)</li>
-  <li>🔊 Noise Level (sound sensor)</li>
-  <li>Solar + 18650 battery powered</li>
-  <li>XIAO ESP32-C3 ultra-low power MCU</li>
+  <li>Temperature readings</li>
+  <li>Humidity readings</li>
+  <li>Air quality using MQ135</li>
+  <li>Noise level sensing</li>
+  <li>Solar powered with 18650 battery</li>
+  <li>Runs on XIAO ESP32-C3</li>
   <li>LoRa communication using RYLR998</li>
-  <li>Deep sleep for extended battery life</li>
-  <li>Weather-resistant 3D printed enclosure</li>
+  <li>Deep sleep for lower power use</li>
+  <li>3D printed outdoor enclosure</li>
 </ul>
 
-<h3>✔ Gateway Node</h3>
+<h3>Gateway Node</h3>
 <ul>
   <li>Receives LoRa packets</li>
-  <li>ESP32 Dev Board</li>
-  <li>Displays data on 0.96" OLED</li>
-  <li>Uploads to Supabase / Thingspeak</li>
-  <li>Optional TinyML anomaly detection (Edge Impulse)</li>
+  <li>Built with ESP32 Dev Board</li>
+  <li>Shows readings on a small OLED</li>
+  <li>Sends data to the cloud dashboard</li>
+  <li>Supports lightweight anomaly detection</li>
 </ul>
 
-<h3>✔ Dashboard</h3>
+<h3>Dashboard</h3>
 <ul>
-  <li>Real-time graphs (AQI, temperature, humidity, noise)</li>
-  <li>24h & weekly trends</li>
-  <li>Alerts for pollution spikes</li>
-  <li>Node status and battery health</li>
+  <li>Real-time sensor readings</li>
+  <li>Daily and weekly trends</li>
+  <li>Alerts for sudden changes</li>
+  <li>Battery and node status</li>
 </ul>
 
 <hr>
 
-<h2>🧱 <strong>System Architecture</strong></h2>
+<h2><strong>System Architecture</strong></h2>
 
 <pre>
-[SOLAR SENSOR NODE]
+[SENSOR NODE]
  - XIAO ESP32C3
- - MQ135 Air Sensor
+ - MQ135 sensor
  - DHT11/DHT22
- - Sound Sensor
- - LoRa Module RYLR998
- - Solar + 18650 + Charger Board
-            |
-            | LoRa Communication
-            v
-[GATEWAY NODE]
+ - Sound sensor
+ - RYLR998 LoRa module
+ - Solar panel + 18650 battery
+
+        LoRa
+
+[GATEWAY]
  - ESP32 Dev Kit
- - LoRa Receiver
- - OLED Display
- - WiFi Cloud Uplink
-            |
-            | HTTPS / WebSocket
-            v
-[CLOUD DASHBOARD]
- - Supabase / Thingspeak
- - Visualization + Alerts
+ - LoRa receiver
+ - OLED display
+ - WiFi to cloud
+
+[CLOUD]
+ - Supabase or Thingspeak
+ - Graphs and alerts
 </pre>
 
-<p><strong>Architecture diagram:</strong> <code>docs/system_architecture.png</code></p>
+<p>Architecture image: docs/system_architecture.png</p>
 
 <hr>
 
-<h2>🧪 <strong>Motivation</strong></h2>
+<h2><strong>Motivation</strong></h2>
+
 <p>
-Air pollution and noise pollution are major problems in many cities. Existing monitoring systems 
-are expensive and limited.  
-<strong>LoRaSense provides a scalable, affordable solution</strong> that can be deployed anywhere.
+Air and noise pollution are common problems but proper monitoring systems are usually expensive
+and hard to deploy. I wanted to see if it was possible to build something simple, low-cost,
+and easy to install in many locations. LoRaSense was made with that idea in mind.
 </p>
 
 <hr>
 
-<h2>🛠️ <strong>Bill of Materials (BOM)</strong></h2>
+<h2><strong>Bill of Materials (BOM)</strong></h2>
 
 <table>
 <thead>
 <tr><th>Component</th><th>Qty</th><th>Price</th><th>Notes</th></tr>
 </thead>
 <tbody>
-<tr><td>Seeed XIAO ESP32-C3</td><td>1</td><td>$5</td><td>Sensor node MCU</td></tr>
-<tr><td>Reyax RYLR998 LoRa Module</td><td>2</td><td>$24</td><td>Node + gateway</td></tr>
-<tr><td>MQ135 Air Quality Sensor</td><td>1</td><td>$4</td><td>Measures gases</td></tr>
-<tr><td>DHT11 / DHT22</td><td>1</td><td>$3</td><td>Temperature + humidity</td></tr>
-<tr><td>Sound Sensor</td><td>1</td><td>$3</td><td>Noise measurement</td></tr>
-<tr><td>Solar Panel (0.5–1W)</td><td>1</td><td>$3</td><td>Renewable power</td></tr>
-<tr><td>18650 Battery</td><td>1</td><td>$3</td><td>Power storage</td></tr>
-<tr><td>TP4056 Charger + Boost</td><td>1</td><td>$2</td><td>Battery charging</td></tr>
+<tr><td>Seeed XIAO ESP32-C3</td><td>1</td><td>$5</td><td>MCU for the sensor node</td></tr>
+<tr><td>Reyax RYLR998 LoRa Module</td><td>2</td><td>$24</td><td>Used for node and gateway</td></tr>
+<tr><td>MQ135 Sensor</td><td>1</td><td>$4</td><td>Air quality</td></tr>
+<tr><td>DHT11 or DHT22</td><td>1</td><td>$3</td><td>Temperature and humidity</td></tr>
+<tr><td>Sound Sensor</td><td>1</td><td>$3</td><td>Noise level</td></tr>
+<tr><td>Solar Panel</td><td>1</td><td>$3</td><td>Powers the node</td></tr>
+<tr><td>18650 Battery</td><td>1</td><td>$3</td><td>Energy storage</td></tr>
+<tr><td>TP4056 Charger Module</td><td>1</td><td>$2</td><td>Battery charging</td></tr>
 <tr><td>ESP32 Dev Board</td><td>1</td><td>$6</td><td>Gateway MCU</td></tr>
-<tr><td>OLED 0.96" Display</td><td>1</td><td>$6</td><td>Live readings</td></tr>
-<tr><td>3D Printed Case</td><td>1</td><td>FREE</td><td>Blueprint reimbursed</td></tr>
+<tr><td>0.96 inch OLED Display</td><td>1</td><td>$6</td><td>Shows readings</td></tr>
+<tr><td>3D Printed Case</td><td>1</td><td>Free</td><td>Printed through Blueprint</td></tr>
 </tbody>
 </table>
 
-<p><strong>Total Cost: ~ $62 (Fits Tier 3)</strong></p>
+<p>Total cost is around $62.</p>
 
 <hr>
 
-<h2>📂 <strong>Repository Structure</strong></h2>
+<h2><strong>Repository Structure</strong></h2>
 
 <pre>
 LoRaSense/
-│
 ├── firmware/
 │   ├── sensor_node/
-│   │   ├── main.cpp
-│   │   └── README.md
-│   │
 │   └── gateway/
-│       ├── main.cpp
-│       └── README.md
-│
 ├── hardware/
 │   ├── case/
-│   │   ├── LoRaSense_Top.stl
-│   │   ├── LoRaSense_Bottom.stl
-│   │   └── README.md
-│   │
 │   └── wiring/
-│       ├── schematic.jpg
-│       └── wiring_diagram.png
-│
 ├── docs/
-│   ├── system_architecture.png
-│   └── project_plan.md
-│
-├── .gitignore
-├── LICENSE
 └── README.md
 </pre>
 
 <hr>
 
-<h2>🔧 <strong>Firmware Overview</strong></h2>
+<h2><strong>Firmware Overview</strong></h2>
 
-<h3>Sensor Node (XIAO ESP32-C3)</h3>
+<h3>Sensor Node</h3>
 <ul>
-  <li>Reads all sensors</li>
-  <li>Packages values into LoRa payload</li>
-  <li>Sends data periodically</li>
-  <li>Deep sleep enabled</li>
+  <li>Reads each sensor</li>
+  <li>Creates a simple packet</li>
+  <li>Sends the data through LoRa</li>
+  <li>Goes into deep sleep until the next cycle</li>
 </ul>
 
-<h3>Gateway (ESP32)</h3>
+<h3>Gateway</h3>
 <ul>
-  <li>Receives LoRa packets via UART</li>
-  <li>Parses CSV payload</li>
-  <li>Displays info on OLED</li>
-  <li>Uploads to cloud backend</li>
-  <li>Runs TinyML anomaly detection</li>
+  <li>Listens for LoRa packets</li>
+  <li>Breaks down the incoming data</li>
+  <li>Shows values on the OLED</li>
+  <li>Uploads readings to the cloud</li>
+  <li>Runs a basic anomaly detection model</li>
 </ul>
 
 <hr>
 
-<h2>📦 <strong>3D Printed Enclosure</strong></h2>
-<p>Files located in:</p>
+<h2><strong>3D Printed Enclosure</strong></h2>
+
+<p>Case files are inside:</p>
 
 <pre>
 hardware/case/
@@ -181,53 +161,54 @@ hardware/case/
   <li>LoRaSense_Bottom.stl</li>
 </ul>
 
-<p>The enclosure includes:</p>
+<p>
+The enclosure includes space for the solar panel, the sensors, and the battery.
+There are openings for airflow and sensor exposure.
+</p>
+
+<hr>
+
+<h2><strong>Dashboard</strong></h2>
+
+<p>The dashboard shows:</p>
+
 <ul>
-  <li>Solar panel mount</li>
-  <li>Ventilation slots</li>
-  <li>Sensor openings</li>
-  <li>Battery compartment</li>
+  <li>Live readings</li>
+  <li>History over time</li>
+  <li>Alerts for unusual spikes</li>
+  <li>Battery and node health</li>
 </ul>
 
 <hr>
 
-<h2>📊 <strong>Dashboard</strong></h2>
-<p>Supports:</p>
+<h2><strong>Project Goals</strong></h2>
+
 <ul>
-  <li>Real-time monitoring</li>
-  <li>Historical trends</li>
-  <li>Pollution spike alerts</li>
-  <li>Battery health & node status</li>
+  <li>Create simple outdoor sensor nodes</li>
+  <li>Use LoRa for long range data transmission</li>
+  <li>Run everything from solar power</li>
+  <li>Build a working dashboard</li>
+  <li>Add basic anomaly detection</li>
+  <li>Document the whole system</li>
 </ul>
 
 <hr>
 
-<h2>🎯 <strong>Project Goals</strong></h2>
+<h2><strong>Current Status</strong></h2>
+
 <ul>
-  <li>Build scalable environmental sensor nodes</li>
-  <li>Use LoRa for long-range communication</li>
-  <li>Create solar-powered autonomous hardware</li>
-  <li>Deploy cloud dashboard</li>
-  <li>Integrate TinyML anomaly detection</li>
-  <li>Fully document all systems</li>
+  <li>Architecture done</li>
+  <li>Firmware for both boards completed</li>
+  <li>Wiring diagrams done</li>
+  <li>3D enclosure finished</li>
+  <li>Dashboard is still in progress</li>
 </ul>
 
 <hr>
 
-<h2>🚧 <strong>Current Status</strong></h2>
-<ul>
-  <li>✔ Architecture completed</li>
-  <li>✔ Repository structure created</li>
-  <li>✔ Sensor node firmware</li>
-  <li>✔ Gateway firmware</li>
-  <li>✔ Wiring diagrams</li>
-  <li>✔ 3D case design</li>
-  <li>⬜ Dashboard setup</li>
-</ul>
+<h2><strong>Contributions</strong></h2>
 
-<hr>
-
-<h2>🤝 <strong>Contributions</strong></h2>
-<p>Pull requests are welcome!  
-This project is open source under the <strong>MIT License</strong>.</p>
-
+<p>
+The project is open source and licensed under MIT.
+Pull requests and improvements are welcome.
+</p>
